@@ -10,9 +10,13 @@
 
 @implementation AppDelegate
 
+@synthesize viewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [Parse setApplicationId:@"n7e34KgerNawtVeTBH1VQPoMpCEmnvOgca2kxt8I"
+                  clientKey:@"fC9nl2GW5V9CaEpkJ8v32a4SDXcvJCeeJ2FEVFIt"];
     return YES;
 }
 							

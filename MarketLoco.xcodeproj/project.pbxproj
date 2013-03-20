@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		885E959816F81E60002AC914 /* FancyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E959716F81E60002AC914 /* FancyCell.m */; };
+		885E959A16F81E73002AC914 /* FancyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 885E959916F81E73002AC914 /* FancyView.xib */; };
+		88CE27B416F8EB540015D45F /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 88CE27B316F8EB540015D45F /* loading.gif */; };
+		88CE27B716F9106C0015D45F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CE27B616F9106B0015D45F /* MessageUI.framework */; };
+		88CE27BD16F9340C0015D45F /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CE27BC16F9340B0015D45F /* icon57.png */; };
+		88CE27BF16F934140015D45F /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CE27BE16F934140015D45F /* icon114.png */; };
+		88CE27C916F93E3B0015D45F /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE27C616F93E3B0015D45F /* ECSlidingViewController.m */; };
+		88CE27CA16F93E3B0015D45F /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE27C816F93E3B0015D45F /* UIImage+ImageWithUIView.m */; };
 		88E6279416F3E78100BDFA9F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E6279316F3E78100BDFA9F /* UIKit.framework */; };
 		88E6279616F3E78100BDFA9F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E6279516F3E78100BDFA9F /* Foundation.framework */; };
 		88E6279816F3E78100BDFA9F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E6279716F3E78100BDFA9F /* CoreGraphics.framework */; };
@@ -18,9 +26,30 @@
 		88E627AA16F3E78100BDFA9F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E627A916F3E78100BDFA9F /* Default-568h@2x.png */; };
 		88E627AD16F3E78100BDFA9F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E627AB16F3E78100BDFA9F /* MainStoryboard.storyboard */; };
 		88E627B016F3E78100BDFA9F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E627AF16F3E78100BDFA9F /* ViewController.m */; };
+		88F34B1D16F7FFC500A03C58 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B1C16F7FFC500A03C58 /* Parse.framework */; };
+		88F34B2716F800A100A03C58 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B1E16F800A100A03C58 /* AudioToolbox.framework */; };
+		88F34B2816F800A100A03C58 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B1F16F800A100A03C58 /* CFNetwork.framework */; };
+		88F34B2916F800A100A03C58 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B2016F800A100A03C58 /* CoreLocation.framework */; };
+		88F34B2A16F800A100A03C58 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B2116F800A100A03C58 /* libz.1.1.3.dylib */; };
+		88F34B2B16F800A100A03C58 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B2216F800A100A03C58 /* MobileCoreServices.framework */; };
+		88F34B2C16F800A100A03C58 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B2316F800A100A03C58 /* QuartzCore.framework */; };
+		88F34B2D16F800A100A03C58 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B2416F800A100A03C58 /* Security.framework */; };
+		88F34B2E16F800A100A03C58 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B2516F800A100A03C58 /* StoreKit.framework */; };
+		88F34B2F16F800A100A03C58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F34B2616F800A100A03C58 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		885E959616F81E60002AC914 /* FancyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyCell.h; sourceTree = "<group>"; };
+		885E959716F81E60002AC914 /* FancyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyCell.m; sourceTree = "<group>"; };
+		885E959916F81E73002AC914 /* FancyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FancyView.xib; sourceTree = "<group>"; };
+		88CE27B316F8EB540015D45F /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		88CE27B616F9106B0015D45F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		88CE27BC16F9340B0015D45F /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
+		88CE27BE16F934140015D45F /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
+		88CE27C516F93E3B0015D45F /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
+		88CE27C616F93E3B0015D45F /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		88CE27C716F93E3B0015D45F /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		88CE27C816F93E3B0015D45F /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
 		88E6278F16F3E78100BDFA9F /* MarketLoco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarketLoco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E6279316F3E78100BDFA9F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		88E6279516F3E78100BDFA9F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -37,6 +66,16 @@
 		88E627AC16F3E78100BDFA9F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		88E627AE16F3E78100BDFA9F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		88E627AF16F3E78100BDFA9F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		88F34B1C16F7FFC500A03C58 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		88F34B1E16F800A100A03C58 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		88F34B1F16F800A100A03C58 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		88F34B2016F800A100A03C58 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		88F34B2116F800A100A03C58 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		88F34B2216F800A100A03C58 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		88F34B2316F800A100A03C58 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		88F34B2416F800A100A03C58 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		88F34B2516F800A100A03C58 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		88F34B2616F800A100A03C58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,18 +83,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88CE27B716F9106C0015D45F /* MessageUI.framework in Frameworks */,
+				88F34B2716F800A100A03C58 /* AudioToolbox.framework in Frameworks */,
+				88F34B2816F800A100A03C58 /* CFNetwork.framework in Frameworks */,
+				88F34B2916F800A100A03C58 /* CoreLocation.framework in Frameworks */,
+				88F34B2A16F800A100A03C58 /* libz.1.1.3.dylib in Frameworks */,
+				88F34B2B16F800A100A03C58 /* MobileCoreServices.framework in Frameworks */,
+				88F34B2C16F800A100A03C58 /* QuartzCore.framework in Frameworks */,
+				88F34B2D16F800A100A03C58 /* Security.framework in Frameworks */,
+				88F34B2E16F800A100A03C58 /* StoreKit.framework in Frameworks */,
+				88F34B2F16F800A100A03C58 /* SystemConfiguration.framework in Frameworks */,
+				88E6279816F3E78100BDFA9F /* CoreGraphics.framework in Frameworks */,
 				88E6279416F3E78100BDFA9F /* UIKit.framework in Frameworks */,
 				88E6279616F3E78100BDFA9F /* Foundation.framework in Frameworks */,
-				88E6279816F3E78100BDFA9F /* CoreGraphics.framework in Frameworks */,
+				88F34B1D16F7FFC500A03C58 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88CE27C416F93E3B0015D45F /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				88CE27C516F93E3B0015D45F /* ECSlidingViewController.h */,
+				88CE27C616F93E3B0015D45F /* ECSlidingViewController.m */,
+				88CE27C716F93E3B0015D45F /* UIImage+ImageWithUIView.h */,
+				88CE27C816F93E3B0015D45F /* UIImage+ImageWithUIView.m */,
+			);
+			path = ECSlidingViewController;
+			sourceTree = "<group>";
+		};
 		88E6278416F3E78100BDFA9F = {
 			isa = PBXGroup;
 			children = (
+				88CE27BE16F934140015D45F /* icon114.png */,
+				88CE27BC16F9340B0015D45F /* icon57.png */,
+				88CE27B616F9106B0015D45F /* MessageUI.framework */,
 				88E6279916F3E78100BDFA9F /* MarketLoco */,
 				88E6279216F3E78100BDFA9F /* Frameworks */,
 				88E6279016F3E78100BDFA9F /* Products */,
@@ -73,6 +137,16 @@
 		88E6279216F3E78100BDFA9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88F34B1E16F800A100A03C58 /* AudioToolbox.framework */,
+				88F34B1F16F800A100A03C58 /* CFNetwork.framework */,
+				88F34B2016F800A100A03C58 /* CoreLocation.framework */,
+				88F34B2116F800A100A03C58 /* libz.1.1.3.dylib */,
+				88F34B2216F800A100A03C58 /* MobileCoreServices.framework */,
+				88F34B2316F800A100A03C58 /* QuartzCore.framework */,
+				88F34B2416F800A100A03C58 /* Security.framework */,
+				88F34B2516F800A100A03C58 /* StoreKit.framework */,
+				88F34B2616F800A100A03C58 /* SystemConfiguration.framework */,
+				88F34B1C16F7FFC500A03C58 /* Parse.framework */,
 				88E6279316F3E78100BDFA9F /* UIKit.framework */,
 				88E6279516F3E78100BDFA9F /* Foundation.framework */,
 				88E6279716F3E78100BDFA9F /* CoreGraphics.framework */,
@@ -84,10 +158,15 @@
 			isa = PBXGroup;
 			children = (
 				88E627A216F3E78100BDFA9F /* AppDelegate.h */,
+				88CE27C416F93E3B0015D45F /* ECSlidingViewController */,
+				88CE27B316F8EB540015D45F /* loading.gif */,
 				88E627A316F3E78100BDFA9F /* AppDelegate.m */,
 				88E627AB16F3E78100BDFA9F /* MainStoryboard.storyboard */,
 				88E627AE16F3E78100BDFA9F /* ViewController.h */,
+				885E959616F81E60002AC914 /* FancyCell.h */,
+				885E959716F81E60002AC914 /* FancyCell.m */,
 				88E627AF16F3E78100BDFA9F /* ViewController.m */,
+				885E959916F81E73002AC914 /* FancyView.xib */,
 				88E6279A16F3E78100BDFA9F /* Supporting Files */,
 			);
 			path = MarketLoco;
@@ -163,6 +242,10 @@
 				88E627A816F3E78100BDFA9F /* Default@2x.png in Resources */,
 				88E627AA16F3E78100BDFA9F /* Default-568h@2x.png in Resources */,
 				88E627AD16F3E78100BDFA9F /* MainStoryboard.storyboard in Resources */,
+				885E959A16F81E73002AC914 /* FancyView.xib in Resources */,
+				88CE27B416F8EB540015D45F /* loading.gif in Resources */,
+				88CE27BD16F9340C0015D45F /* icon57.png in Resources */,
+				88CE27BF16F934140015D45F /* icon114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +259,9 @@
 				88E627A016F3E78100BDFA9F /* main.m in Sources */,
 				88E627A416F3E78100BDFA9F /* AppDelegate.m in Sources */,
 				88E627B016F3E78100BDFA9F /* ViewController.m in Sources */,
+				885E959816F81E60002AC914 /* FancyCell.m in Sources */,
+				88CE27C916F93E3B0015D45F /* ECSlidingViewController.m in Sources */,
+				88CE27CA16F93E3B0015D45F /* UIImage+ImageWithUIView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +340,10 @@
 		88E627B416F3E78100BDFA9F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MarketLoco/MarketLoco-Prefix.pch";
 				INFOPLIST_FILE = "MarketLoco/MarketLoco-Info.plist";
@@ -265,6 +355,10 @@
 		88E627B516F3E78100BDFA9F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MarketLoco/MarketLoco-Prefix.pch";
 				INFOPLIST_FILE = "MarketLoco/MarketLoco-Info.plist";
@@ -292,6 +386,7 @@
 				88E627B516F3E78100BDFA9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
