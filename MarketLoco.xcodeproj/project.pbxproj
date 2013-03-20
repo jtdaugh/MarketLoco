@@ -15,6 +15,10 @@
 		88CE27BF16F934140015D45F /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CE27BE16F934140015D45F /* icon114.png */; };
 		88CE27C916F93E3B0015D45F /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE27C616F93E3B0015D45F /* ECSlidingViewController.m */; };
 		88CE27CA16F93E3B0015D45F /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE27C816F93E3B0015D45F /* UIImage+ImageWithUIView.m */; };
+		88CE27CD16F942F60015D45F /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE27CC16F942F60015D45F /* InitialViewController.m */; };
+		88CE27D016F945F70015D45F /* NetworksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE27CF16F945F70015D45F /* NetworksViewController.m */; };
+		88CE27D316F9545B0015D45F /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE27D216F9545B0015D45F /* CategoriesViewController.m */; };
+		88CE27D616F955450015D45F /* ParseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 88CE27D516F955440015D45F /* ParseData.m */; };
 		88E6279416F3E78100BDFA9F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E6279316F3E78100BDFA9F /* UIKit.framework */; };
 		88E6279616F3E78100BDFA9F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E6279516F3E78100BDFA9F /* Foundation.framework */; };
 		88E6279816F3E78100BDFA9F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E6279716F3E78100BDFA9F /* CoreGraphics.framework */; };
@@ -50,6 +54,14 @@
 		88CE27C616F93E3B0015D45F /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		88CE27C716F93E3B0015D45F /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
 		88CE27C816F93E3B0015D45F /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		88CE27CB16F942F60015D45F /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
+		88CE27CC16F942F60015D45F /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
+		88CE27CF16F945F70015D45F /* NetworksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworksViewController.m; sourceTree = "<group>"; };
+		88CE27D116F9545A0015D45F /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
+		88CE27D216F9545B0015D45F /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
+		88CE27D416F955440015D45F /* ParseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseData.h; sourceTree = "<group>"; };
+		88CE27D516F955440015D45F /* ParseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseData.m; sourceTree = "<group>"; };
+		88CE27EF16F9652F0015D45F /* NetworksViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworksViewController.h; sourceTree = "<group>"; };
 		88E6278F16F3E78100BDFA9F /* MarketLoco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarketLoco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E6279316F3E78100BDFA9F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		88E6279516F3E78100BDFA9F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -162,6 +174,14 @@
 				88CE27B316F8EB540015D45F /* loading.gif */,
 				88E627A316F3E78100BDFA9F /* AppDelegate.m */,
 				88E627AB16F3E78100BDFA9F /* MainStoryboard.storyboard */,
+				88CE27CB16F942F60015D45F /* InitialViewController.h */,
+				88CE27D116F9545A0015D45F /* CategoriesViewController.h */,
+				88CE27D416F955440015D45F /* ParseData.h */,
+				88CE27D516F955440015D45F /* ParseData.m */,
+				88CE27D216F9545B0015D45F /* CategoriesViewController.m */,
+				88CE27EF16F9652F0015D45F /* NetworksViewController.h */,
+				88CE27CF16F945F70015D45F /* NetworksViewController.m */,
+				88CE27CC16F942F60015D45F /* InitialViewController.m */,
 				88E627AE16F3E78100BDFA9F /* ViewController.h */,
 				885E959616F81E60002AC914 /* FancyCell.h */,
 				885E959716F81E60002AC914 /* FancyCell.m */,
@@ -262,6 +282,10 @@
 				885E959816F81E60002AC914 /* FancyCell.m in Sources */,
 				88CE27C916F93E3B0015D45F /* ECSlidingViewController.m in Sources */,
 				88CE27CA16F93E3B0015D45F /* UIImage+ImageWithUIView.m in Sources */,
+				88CE27CD16F942F60015D45F /* InitialViewController.m in Sources */,
+				88CE27D016F945F70015D45F /* NetworksViewController.m in Sources */,
+				88CE27D316F9545B0015D45F /* CategoriesViewController.m in Sources */,
+				88CE27D616F955450015D45F /* ParseData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

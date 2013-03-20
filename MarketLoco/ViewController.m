@@ -39,12 +39,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [ParseData sharedParseData];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate setViewController:self];
     self.tbView.delegate = self;
     self.tbView.dataSource = self;
-    [self setNetwork:@"umich"]; //make this work
-	[self pullNewestItems];
+    network = [[NSUserDefaults standardUserDefaults]objectForKey:@"network"];
+    if (!network) {
+        locationManager = [[CLLocationManager alloc] init];
+        [locationManager startUpdatingLocation];
+        locationManager.delegate = self;
+    } else {
+        [self pullNewestItems];
+    }
     cellForReference = [[FancyCell alloc] init];
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"FancyView" owner:nil options:nil];
     
@@ -57,7 +64,21 @@
         }
     }
     
-    NSLog(@"Title Font: %@", [cellForReference title].font);
+    self.view.layer.shadowOpacity = 0.75f;
+    self.view.layer.shadowRadius = 10.0f;
+    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+    
+    if (![self.slidingViewController.underRightViewController isKindOfClass:[NetworksViewController class]]) {
+        self.slidingViewController.underRightViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Networks"];
+    }
+    
+    if (![self.slidingViewController.underLeftViewController isKindOfClass:[CategoriesViewController class]]) {
+        self.slidingViewController.underLeftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Categories"];
+    }
+    
+    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -75,12 +96,22 @@
     NSLog(@"Location: %@", [newLocation description]);
     userLocation = newLocation;
     [locationManager stopUpdatingLocation];
-    [self geoSearch];
+    [self geoQueryForNetwork];
 }
 
--(void)geoSearch{
-   
+-(void)geoQueryForNetwork {
+    PFQuery *query = [PFQuery queryWithClassName:@"Networks"];
+    // Interested in locations near user.
+    PFGeoPoint *myGeoPoint = [PFGeoPoint geoPointWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
+    [query whereKeyDoesNotExist:@"dev"];
+    [query whereKey:@"location" nearGeoPoint:myGeoPoint];
+    // Limit what could be a lot of points.
+    PFObject *networkObj = [query getFirstObject];
+    network = [networkObj objectForKey:@"namespace"];
+    [[NSUserDefaults standardUserDefaults]setObject:network forKey:@"network"];
+    [self pullNewestItems];
 }
+
 
 -(void)pullNewestItems {
     PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
@@ -315,51 +346,20 @@
     return cell;
     
     
-    
-    
-    
-    
-    
-//    
-//    
-//    
-//    static NSString *CellIdentifier = @"fancyCell";
-//    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//        
-//    }
-//    PFObject *object;
-//   
-//    object = [itemArray objectAtIndex:[indexPath row]];
-//    
-//    NSData * imgData = [itemPics objectAtIndex:[indexPath row]];
-//
-//    if (imgData != [NSNull null]) {
-//        [cell.imageView setImage:[UIImage imageWithData:imgData]];
-//    } else {
-////        [cell.imageView setImage:[UIImage imageNamed:@"chris2.png"]];
-//    }
-//    
-//    NSString *title = [object objectForKey:@"title"];
-//    NSString *description = [object objectForKey:@"description"];
-//    
-//    [cell.textLabel setText:title];
-//    [cell.detailTextLabel setText:description];
-//    
-//    if ([indexPath row] >= [itemArray count] - 1) {
-//        [self addItemsToBottomFromIndex:[itemArray count]];
-//    }
-//    return cell;
 }
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 60;
-//}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // do nothing
+}
+
+- (IBAction)revealCategories:(id)sender
+{
+    [self.slidingViewController anchorTopViewTo:ECRight];
+}
+
+- (IBAction)revealNetworks:(id)sender
+{
+    [self.slidingViewController anchorTopViewTo:ECLeft];
 }
 
 

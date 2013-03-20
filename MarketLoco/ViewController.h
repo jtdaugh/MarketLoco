@@ -12,6 +12,10 @@
 #import "FancyCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
+#import "ParseData.h"
+#import "ECSlidingViewController.h"
+#import "NetworksViewController.h"
+#import "CategoriesViewController.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 
@@ -26,5 +30,10 @@
 
 -(void) pullNewestItems;
 -(void)addItemsToBottomFromIndex:(int)startIndex;
+-(void)geoQueryForNetwork;
+
+- (IBAction)revealNetworks:(id)sender;
+- (IBAction)revealCategories:(id)sender;
+
 
 @end
