@@ -12,8 +12,7 @@
 #import <Parse/Parse.h>
 //#import "AppDelegate.h"
 
-@interface FancyCell : UITableViewCell <MFMailComposeViewControllerDelegate,
-MFMessageComposeViewControllerDelegate>
+@interface FancyCell : UITableViewCell 
 
 @property (nonatomic, strong) IBOutlet UILabel *title;
 @property (nonatomic, strong) IBOutlet UILabel *description;

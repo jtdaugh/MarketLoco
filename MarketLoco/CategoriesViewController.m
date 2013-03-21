@@ -36,27 +36,23 @@
     self.peekRightAmount = 40.0f;
     [self.slidingViewController setAnchorRightPeekAmount:self.peekRightAmount];
     self.slidingViewController.underLeftWidthLayout = ECVariableRevealWidth;
-
-    // Do any additional setup after loading the view.
 }
-
-
-
-
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[[ParseData sharedParseData] categories] count]+1;
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
 }
+
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,7 +62,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
     }
     NSString *title;
     if (indexPath.row > 0) {
@@ -80,7 +75,6 @@
 
     return cell;
 }
-
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath  {
@@ -100,11 +94,6 @@
     
     //do nothing
 }
-
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning

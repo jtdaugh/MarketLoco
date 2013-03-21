@@ -18,7 +18,9 @@
 #import "CategoriesViewController.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate,
-MFMessageComposeViewControllerDelegate>
+MFMessageComposeViewControllerDelegate> {
+    bool currentlyLoadingMore;
+}
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic,strong)CLLocation *userLocation;
@@ -39,7 +41,7 @@ MFMessageComposeViewControllerDelegate>
 -(void)addItemsToBottomFromIndex:(int)startIndex;
 -(void)getMoreObjectsWithQuery:(PFQuery *)query andStartIndex:(int) startIndex;
 -(void)geoQueryForNetwork;
--(void) makeBarPretty;
+-(void)makeBarPretty;
 
 - (IBAction)revealNetworks:(id)sender;
 - (IBAction)revealCategories:(id)sender;

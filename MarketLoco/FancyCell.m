@@ -47,9 +47,9 @@
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [alert show];
-    
     }
 }
+
 
 -(void)displaySMSComposerSheet
 {
@@ -57,13 +57,11 @@
     if([MFMessageComposeViewController canSendText])
     {
         [item fetchIfNeeded];
-            
         controller.body = [NSString stringWithFormat:@"I'm interested in \"%@.\" ", [item objectForKey:@"title"]];
         controller.recipients = [NSArray arrayWithObject:[item objectForKey:@"postedBy"]];
         controller.messageComposeDelegate = [APP_DELEGATE viewController];
         [[APP_DELEGATE viewController] presentModalViewController:controller animated:YES];
     }
-    //do nothing (OS will alert user of error)
 }
 
 
