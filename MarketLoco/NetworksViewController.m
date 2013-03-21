@@ -68,6 +68,8 @@
     PFObject *object = [[[ParseData sharedParseData] networks] objectAtIndex:indexPath.row];  
     NSString *title = [object objectForKey:@"longName"];
     [cell.textLabel setText:title];
+    [cell.textLabel setTextColor:[UIColor colorWithRed:250 green:250 blue:250 alpha:1]];
+    
     return cell;
 }
 
@@ -80,7 +82,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:[selected objectForKey:@"name"] forKey:@"networkName"];
     [[APP_DELEGATE viewController] pullNewestItemsForNetwork:selectedNetwork andCategory:@"All Items"];
     [[[APP_DELEGATE viewController] tbView] scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
-
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:[NSString stringWithFormat:@"Picked School: %@", selectedNetwork]];
+;
     [self.slidingViewController resetTopView];
 
 }

@@ -76,6 +76,8 @@
         title = @"All Items";
     }
     [cell.textLabel setText:title];
+    [cell.textLabel setTextColor:[UIColor colorWithRed:250 green:250 blue:250 alpha:1]];
+
     return cell;
 }
 
@@ -92,7 +94,8 @@
     if (!tempNetwork) tempNetwork = @"umich";
     [[APP_DELEGATE viewController] pullNewestItemsForNetwork:tempNetwork andCategory:title];
     [[[APP_DELEGATE viewController] tbView] scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
-
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:[NSString stringWithFormat:@"Picked Category: %@", title]];
     [self.slidingViewController resetTopView];
     
     //do nothing

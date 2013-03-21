@@ -11,7 +11,7 @@
 
 @implementation FancyCell
 
-@synthesize title, description, priceLabel, pic, container, contactSeller, phoneNumber;
+@synthesize title, description, priceLabel, pic, container, contactSeller, item;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -32,7 +32,9 @@
 
 
 -(IBAction)contactSellerClicked {
-    
+    [item fetchIfNeeded];
+    [item incrementKey:@"mobileContact"];
+    [item saveInBackground];
     Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
     
     if (messageClass != nil) {
@@ -55,7 +57,7 @@
     if([MFMessageComposeViewController canSendText])
     {
         controller.body = @"I saw your item on MarketLoco. I'd like to buy it.";
-        controller.recipients = [NSArray arrayWithObject:phoneNumber];
+        controller.recipients = [NSArray arrayWithObject:[item objectForKey:@"createdBy"]];
         controller.messageComposeDelegate = [APP_DELEGATE viewController];
         [[APP_DELEGATE viewController] presentModalViewController:controller animated:YES];
     }

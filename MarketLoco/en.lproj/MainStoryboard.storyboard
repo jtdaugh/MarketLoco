@@ -27,20 +27,30 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EYO-iW-jys">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="b9O-pg-G4O"/>
-                                </constraints>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.14901960784313725" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.1960784314" green="0.2156862745" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="EzQ-Ar-51w" id="ttn-Mj-YrT"/>
                                     <outlet property="delegate" destination="EzQ-Ar-51w" id="Bjs-lO-11x"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTe-ak-cc4">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="Rg6-x1-Bzm"/>
+                                </constraints>
+                                <color key="tintColor" red="0.0" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Select School" id="dd3-mx-QXb"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="EYO-iW-jys" firstAttribute="leading" secondItem="RTe-ak-cc4" secondAttribute="leading" type="default" id="1eh-Eh-G3F"/>
                             <constraint firstItem="EYO-iW-jys" firstAttribute="bottom" secondItem="kod-rW-XBo" secondAttribute="bottom" type="default" id="5ar-Q6-XQA"/>
-                            <constraint firstItem="EYO-iW-jys" firstAttribute="top" secondItem="kod-rW-XBo" secondAttribute="top" type="default" id="8hR-8J-Pab"/>
+                            <constraint firstItem="RTe-ak-cc4" firstAttribute="top" secondItem="kod-rW-XBo" secondAttribute="top" type="default" id="WyF-RN-lwf"/>
+                            <constraint firstItem="RTe-ak-cc4" firstAttribute="bottom" secondItem="EYO-iW-jys" secondAttribute="top" type="default" id="f9i-8n-64g"/>
+                            <constraint firstItem="RTe-ak-cc4" firstAttribute="trailing" secondItem="kod-rW-XBo" secondAttribute="trailing" type="default" id="hta-G8-Rsj"/>
                             <constraint firstItem="EYO-iW-jys" firstAttribute="trailing" secondItem="kod-rW-XBo" secondAttribute="trailing" type="default" id="k1t-KY-9Wh"/>
                         </constraints>
                     </view>
@@ -116,8 +126,18 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RiW-o5-fzW">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oG5-bp-lrb">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="mA0-OA-Nk2"/>
+                                </constraints>
+                                <color key="tintColor" red="0.0" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Select Category" id="Wlr-ww-UW6"/>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RiW-o5-fzW">
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.14901960784313725" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.19607843137254902" green="0.21568627450980393" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="0cN-tC-87M" id="LYb-7X-nGc"/>
                                     <outlet property="delegate" destination="0cN-tC-87M" id="d7f-PD-VnN"/>
@@ -126,10 +146,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RiW-o5-fzW" firstAttribute="trailing" secondItem="8Hy-6v-rLP" secondAttribute="trailing" type="default" id="Ddc-gF-1ca"/>
+                            <constraint firstItem="oG5-bp-lrb" firstAttribute="trailing" secondItem="RiW-o5-fzW" secondAttribute="trailing" type="default" id="1Zk-cR-oiB"/>
+                            <constraint firstItem="oG5-bp-lrb" firstAttribute="leading" secondItem="8Hy-6v-rLP" secondAttribute="leading" type="default" id="IYB-lT-KUt"/>
                             <constraint firstItem="RiW-o5-fzW" firstAttribute="leading" secondItem="8Hy-6v-rLP" secondAttribute="leading" type="default" id="Wdc-n8-aZO"/>
-                            <constraint firstItem="RiW-o5-fzW" firstAttribute="bottom" secondItem="8Hy-6v-rLP" secondAttribute="bottom" type="default" id="l2M-hP-1NC"/>
-                            <constraint firstItem="RiW-o5-fzW" firstAttribute="top" secondItem="8Hy-6v-rLP" secondAttribute="top" type="default" id="xhk-8V-3Nu"/>
+                            <constraint firstItem="RiW-o5-fzW" firstAttribute="bottom" secondItem="8Hy-6v-rLP" secondAttribute="bottom" type="default" id="g00-Xk-2Xm"/>
+                            <constraint firstItem="RiW-o5-fzW" firstAttribute="top" secondItem="oG5-bp-lrb" secondAttribute="bottom" type="default" id="j1O-5T-BI5"/>
+                            <constraint firstItem="oG5-bp-lrb" firstAttribute="top" secondItem="8Hy-6v-rLP" secondAttribute="top" type="default" id="o5S-hX-wdM"/>
                         </constraints>
                     </view>
                     <connections>

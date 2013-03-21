@@ -16,9 +16,15 @@
 		88298ACB16FA8AA000F514C3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 88298ACA16FA8AA000F514C3 /* Default.png */; };
 		88298ACD16FA8AA700F514C3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88298ACC16FA8AA700F514C3 /* Default@2x.png */; };
 		88298ACF16FA8AAC00F514C3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88298ACE16FA8AAC00F514C3 /* Default-568h@2x.png */; };
+		88298AD316FA915B00F514C3 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 88298AD216FA915B00F514C3 /* loading.gif */; };
+		88298AE916FA985800F514C3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88298AE816FA985800F514C3 /* CoreTelephony.framework */; };
 		885E959816F81E60002AC914 /* FancyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E959716F81E60002AC914 /* FancyCell.m */; };
 		885E959A16F81E73002AC914 /* FancyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 885E959916F81E73002AC914 /* FancyView.xib */; };
-		88CE27B416F8EB540015D45F /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 88CE27B316F8EB540015D45F /* loading.gif */; };
+		88988A9F16FAA92100E64C1A /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88988A9516FAA92100E64C1A /* MPCJSONDataSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		88988AA016FAA92100E64C1A /* MPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88988A9716FAA92100E64C1A /* MPCJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		88988AA116FAA92100E64C1A /* MPCSerializedJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = 88988A9916FAA92100E64C1A /* MPCSerializedJSONData.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		88988AA216FAA92100E64C1A /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 88988A9C16FAA92100E64C1A /* NSData+MPBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		88988AA316FAA92100E64C1A /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88988A9E16FAA92100E64C1A /* Mixpanel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		88CE27B716F9106C0015D45F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CE27B616F9106B0015D45F /* MessageUI.framework */; };
 		88CE27BD16F9340C0015D45F /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CE27BC16F9340B0015D45F /* icon57.png */; };
 		88CE27BF16F934140015D45F /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CE27BE16F934140015D45F /* icon114.png */; };
@@ -61,10 +67,21 @@
 		88298ACA16FA8AA000F514C3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		88298ACC16FA8AA700F514C3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		88298ACE16FA8AAC00F514C3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		88298AD216FA915B00F514C3 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		88298AE816FA985800F514C3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		885E959616F81E60002AC914 /* FancyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyCell.h; sourceTree = "<group>"; };
 		885E959716F81E60002AC914 /* FancyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyCell.m; sourceTree = "<group>"; };
 		885E959916F81E73002AC914 /* FancyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FancyView.xib; sourceTree = "<group>"; };
-		88CE27B316F8EB540015D45F /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		88988A9416FAA92100E64C1A /* MPCJSONDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCJSONDataSerializer.h; sourceTree = "<group>"; };
+		88988A9516FAA92100E64C1A /* MPCJSONDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCJSONDataSerializer.m; sourceTree = "<group>"; };
+		88988A9616FAA92100E64C1A /* MPCJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCJSONSerializer.h; sourceTree = "<group>"; };
+		88988A9716FAA92100E64C1A /* MPCJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCJSONSerializer.m; sourceTree = "<group>"; };
+		88988A9816FAA92100E64C1A /* MPCSerializedJSONData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCSerializedJSONData.h; sourceTree = "<group>"; };
+		88988A9916FAA92100E64C1A /* MPCSerializedJSONData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCSerializedJSONData.m; sourceTree = "<group>"; };
+		88988A9B16FAA92100E64C1A /* NSData+MPBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MPBase64.h"; sourceTree = "<group>"; };
+		88988A9C16FAA92100E64C1A /* NSData+MPBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MPBase64.m"; sourceTree = "<group>"; };
+		88988A9D16FAA92100E64C1A /* Mixpanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixpanel.h; sourceTree = "<group>"; };
+		88988A9E16FAA92100E64C1A /* Mixpanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mixpanel.m; sourceTree = "<group>"; };
 		88CE27B616F9106B0015D45F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		88CE27BC16F9340B0015D45F /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
 		88CE27BE16F934140015D45F /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
@@ -113,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88298AE916FA985800F514C3 /* CoreTelephony.framework in Frameworks */,
 				88CE27B716F9106C0015D45F /* MessageUI.framework in Frameworks */,
 				88F34B2716F800A100A03C58 /* AudioToolbox.framework in Frameworks */,
 				88F34B2816F800A100A03C58 /* CFNetwork.framework in Frameworks */,
@@ -133,6 +151,66 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88298AD416FA916200F514C3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				88298ACE16FA8AAC00F514C3 /* Default-568h@2x.png */,
+				88298ACC16FA8AA700F514C3 /* Default@2x.png */,
+				88298ACA16FA8AA000F514C3 /* Default.png */,
+				88CE27BE16F934140015D45F /* icon114.png */,
+				880869B616F980700089636B /* locologo.png */,
+				88298AC116FA741F00F514C3 /* contactSellerPressed.png */,
+				88298AC216FA741F00F514C3 /* contactSellerPressed@2x.png */,
+				88298AD216FA915B00F514C3 /* loading.gif */,
+				88298AC316FA741F00F514C3 /* contactSeller@2x.png */,
+				88298AC416FA741F00F514C3 /* contactSeller.png */,
+				880869B716F980700089636B /* locologo@2x.png */,
+				88CE27BC16F9340B0015D45F /* icon57.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		88988A9116FAA92100E64C1A /* Mixpanel */ = {
+			isa = PBXGroup;
+			children = (
+				88988A9216FAA92100E64C1A /* Library */,
+				88988A9D16FAA92100E64C1A /* Mixpanel.h */,
+				88988A9E16FAA92100E64C1A /* Mixpanel.m */,
+			);
+			path = Mixpanel;
+			sourceTree = "<group>";
+		};
+		88988A9216FAA92100E64C1A /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				88988A9316FAA92100E64C1A /* JSON */,
+				88988A9A16FAA92100E64C1A /* NSData_Base64 */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		88988A9316FAA92100E64C1A /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				88988A9416FAA92100E64C1A /* MPCJSONDataSerializer.h */,
+				88988A9516FAA92100E64C1A /* MPCJSONDataSerializer.m */,
+				88988A9616FAA92100E64C1A /* MPCJSONSerializer.h */,
+				88988A9716FAA92100E64C1A /* MPCJSONSerializer.m */,
+				88988A9816FAA92100E64C1A /* MPCSerializedJSONData.h */,
+				88988A9916FAA92100E64C1A /* MPCSerializedJSONData.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		88988A9A16FAA92100E64C1A /* NSData_Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				88988A9B16FAA92100E64C1A /* NSData+MPBase64.h */,
+				88988A9C16FAA92100E64C1A /* NSData+MPBase64.m */,
+			);
+			path = NSData_Base64;
+			sourceTree = "<group>";
+		};
 		88CE27C416F93E3B0015D45F /* ECSlidingViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,18 +225,8 @@
 		88E6278416F3E78100BDFA9F = {
 			isa = PBXGroup;
 			children = (
-				88298ACE16FA8AAC00F514C3 /* Default-568h@2x.png */,
-				88298ACC16FA8AA700F514C3 /* Default@2x.png */,
-				88298ACA16FA8AA000F514C3 /* Default.png */,
-				88CE27BE16F934140015D45F /* icon114.png */,
-				880869B616F980700089636B /* locologo.png */,
-				88298AC116FA741F00F514C3 /* contactSellerPressed.png */,
-				88298AC216FA741F00F514C3 /* contactSellerPressed@2x.png */,
-				88298AC316FA741F00F514C3 /* contactSeller@2x.png */,
-				88298AC416FA741F00F514C3 /* contactSeller.png */,
-				880869B716F980700089636B /* locologo@2x.png */,
-				88CE27BC16F9340B0015D45F /* icon57.png */,
-				88CE27B616F9106B0015D45F /* MessageUI.framework */,
+				88988A9116FAA92100E64C1A /* Mixpanel */,
+				88298AD416FA916200F514C3 /* Images */,
 				88E6279916F3E78100BDFA9F /* MarketLoco */,
 				88E6279216F3E78100BDFA9F /* Frameworks */,
 				88E6279016F3E78100BDFA9F /* Products */,
@@ -176,6 +244,8 @@
 		88E6279216F3E78100BDFA9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88298AE816FA985800F514C3 /* CoreTelephony.framework */,
+				88CE27B616F9106B0015D45F /* MessageUI.framework */,
 				88F34B1E16F800A100A03C58 /* AudioToolbox.framework */,
 				88F34B1F16F800A100A03C58 /* CFNetwork.framework */,
 				88F34B2016F800A100A03C58 /* CoreLocation.framework */,
@@ -198,7 +268,6 @@
 			children = (
 				88E627A216F3E78100BDFA9F /* AppDelegate.h */,
 				88CE27C416F93E3B0015D45F /* ECSlidingViewController */,
-				88CE27B316F8EB540015D45F /* loading.gif */,
 				88E627A316F3E78100BDFA9F /* AppDelegate.m */,
 				88E627AB16F3E78100BDFA9F /* MainStoryboard.storyboard */,
 				88CE27CB16F942F60015D45F /* InitialViewController.h */,
@@ -290,7 +359,6 @@
 				88E627AA16F3E78100BDFA9F /* Default-568h@2x.png in Resources */,
 				88E627AD16F3E78100BDFA9F /* MainStoryboard.storyboard in Resources */,
 				885E959A16F81E73002AC914 /* FancyView.xib in Resources */,
-				88CE27B416F8EB540015D45F /* loading.gif in Resources */,
 				88CE27BD16F9340C0015D45F /* icon57.png in Resources */,
 				88CE27BF16F934140015D45F /* icon114.png in Resources */,
 				880869B816F980700089636B /* locologo.png in Resources */,
@@ -302,6 +370,7 @@
 				88298ACB16FA8AA000F514C3 /* Default.png in Resources */,
 				88298ACD16FA8AA700F514C3 /* Default@2x.png in Resources */,
 				88298ACF16FA8AAC00F514C3 /* Default-568h@2x.png in Resources */,
+				88298AD316FA915B00F514C3 /* loading.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +391,11 @@
 				88CE27D016F945F70015D45F /* NetworksViewController.m in Sources */,
 				88CE27D316F9545B0015D45F /* CategoriesViewController.m in Sources */,
 				88CE27D616F955450015D45F /* ParseData.m in Sources */,
+				88988A9F16FAA92100E64C1A /* MPCJSONDataSerializer.m in Sources */,
+				88988AA016FAA92100E64C1A /* MPCJSONSerializer.m in Sources */,
+				88988AA116FAA92100E64C1A /* MPCSerializedJSONData.m in Sources */,
+				88988AA216FAA92100E64C1A /* NSData+MPBase64.m in Sources */,
+				88988AA316FAA92100E64C1A /* Mixpanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +474,7 @@
 		88E627B416F3E78100BDFA9F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -415,6 +490,7 @@
 		88E627B516F3E78100BDFA9F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

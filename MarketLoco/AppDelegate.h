@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
+#import "Mixpanel.h"
 #define APP_DELEGATE (AppDelegate *)[[UIApplication sharedApplication] delegate]
+#define MIXPANEL_TOKEN @"69253db17590ba31bc8ef5dcbbecfdc8"
 
 @class ViewController;
 

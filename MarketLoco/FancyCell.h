@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "AppDelegate.h"
+#import <Parse/Parse.h>
+//#import "AppDelegate.h"
 
 @interface FancyCell : UITableViewCell <MFMailComposeViewControllerDelegate,
 MFMessageComposeViewControllerDelegate>
@@ -20,7 +21,7 @@ MFMessageComposeViewControllerDelegate>
 @property (nonatomic, strong) IBOutlet UILabel *priceLabel;
 @property (nonatomic, strong) IBOutlet UIView *container;
 @property (nonatomic, strong) IBOutlet UIButton *contactSeller;
-@property (nonatomic, strong) NSString *phoneNumber;
+@property (nonatomic, strong) PFObject *item;
 
 -(IBAction)contactSellerClicked;
 -(void)displaySMSComposerSheet;

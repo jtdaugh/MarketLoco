@@ -50,6 +50,21 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Opened iOS App"];
+    
+    cellForReference = [[FancyCell alloc] init];
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"FancyView" owner:nil options:nil];
+    
+    for(id currentObject in topLevelObjects)
+    {
+        if([currentObject isKindOfClass:[FancyCell class]])
+        {
+            cellForReference = (FancyCell *)currentObject;
+            break;
+        }
+    }
+    
     [ParseData sharedParseData];
     [self makeBarPretty];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -66,17 +81,7 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     } else {
         [self pullNewestItemsForNetwork:prevNetwork andCategory:@"All Items" ];
     }
-    cellForReference = [[FancyCell alloc] init];
-    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"FancyView" owner:nil options:nil];
-    
-    for(id currentObject in topLevelObjects)
-    {
-        if([currentObject isKindOfClass:[FancyCell class]])
-        {
-            cellForReference = (FancyCell *)currentObject;
-            break;
-        }
-    }
+   
     
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
@@ -125,7 +130,8 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     networkName = [networkObj objectForKey:@"name"];
     [[NSUserDefaults standardUserDefaults]setObject:locNetwork forKey:@"network"];
     [[NSUserDefaults standardUserDefaults]setObject:networkName forKey:@"networkName"];
-
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:[NSString stringWithFormat:@"Autolocated School: %@", locNetwork]];
     [self pullNewestItemsForNetwork:locNetwork andCategory:@"All Items"];
 }
 
@@ -173,7 +179,7 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
                                 return;
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [itemPics replaceObjectAtIndex:i withObject:data];
-                                NSLog(@"added pic");
+//                                NSLog(@"added pic");
                                 if (i <= 2) {
                                     [[self tbView] reloadData];
                                 }
@@ -185,7 +191,6 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
-
         }];
     }
 }
@@ -225,7 +230,7 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
                             return;
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [itemPics replaceObjectAtIndex:realIndex withObject:data];
-                            NSLog(@"added pic");
+//                            NSLog(@"added pic");
                         });
                     }
                 });
@@ -261,9 +266,9 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     if ([descrip length] > 300) {
         descrip = [NSString stringWithFormat:@"%@...",[descrip substringToIndex:300]];
     }
-    
-    CGSize descriptionSize = [descrip sizeWithFont:[cellForReference description].font
-                                                                    constrainedToSize:CGSizeMake(MAX_DESCRIPTION_WIDTH, MAX_DESCRIPTION_HEIGHT)
+
+    UIFont *daFont = [[self cellForReference] description].font;
+    CGSize descriptionSize = [descrip sizeWithFont:daFont constrainedToSize:CGSizeMake(MAX_DESCRIPTION_WIDTH, MAX_DESCRIPTION_HEIGHT)
                                                                 lineBreakMode:NSLineBreakByWordWrapping];
     NSString *price = @"$";
     NSString *tempPrice = [object objectForKey:@"price"];
@@ -286,10 +291,10 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     
     int h = imageHeight + titleSize.height + descriptionSize.height + GAP_BETWEEN_CELLS + (2 * GAP_BETWEEN_TEXTS) + BOX_PADDING + CONTACT_HEIGHT;
     
-    NSLog(@"description Size- h:%f , w:%f", descriptionSize.height, descriptionSize.width);
-    NSLog(@"title Size- h:%f , w:%f", titleSize.height, titleSize.width);
-    NSLog(@"imageHeight:%d", imageHeight);
-    NSLog(@"Set row height: %d", h);
+//    NSLog(@"description Size- h:%f , w:%f", descriptionSize.height, descriptionSize.width);
+//    NSLog(@"title Size- h:%f , w:%f", titleSize.height, titleSize.width);
+//    NSLog(@"imageHeight:%d", imageHeight);
+//    NSLog(@"Set row height: %d", h);
     return h;
 }
 
@@ -305,7 +310,7 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     FancyCell *cell = (FancyCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil){
-        NSLog(@"\nNew Cell Made");
+//        NSLog(@"\nNew Cell Made");
         
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"FancyView" owner:nil options:nil];
         
@@ -342,8 +347,8 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     NSString *price = @"$";
     price = [price stringByAppendingString:[object objectForKey:@"price"]];
     
-    NSLog(@"Title: %@", title);
-    NSLog(@"Description: %@", description);
+//    NSLog(@"Title: %@", title);
+//    NSLog(@"Description: %@", description);
 
     
     [[cell title] setText:title];
@@ -371,11 +376,11 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
                             constrainedToSize:CGSizeMake(maxTitleWidth, MAX_TITLE_HEIGHT)
                              lineBreakMode:NSLineBreakByWordWrapping];
   
-    NSLog(@"description Size- h:%f , w:%f", descriptionSize.height, descriptionSize.width);
-    NSLog(@"title Size- h:%f , w:%f", titleSize.height, titleSize.width);
-    NSLog(@"price Size- h:%f , w:%f", descriptionSize.height, descriptionSize.width);
-
-    NSLog(@"imageHeight:%d", imageHeight);
+//    NSLog(@"description Size- h:%f , w:%f", descriptionSize.height, descriptionSize.width);
+//    NSLog(@"title Size- h:%f , w:%f", titleSize.height, titleSize.width);
+//    NSLog(@"price Size- h:%f , w:%f", descriptionSize.height, descriptionSize.width);
+//
+//    NSLog(@"imageHeight:%d", imageHeight);
     
     int containerHeight = imageHeight + descriptionSize.height + titleSize.height + (GAP_BETWEEN_TEXTS * 2) + BOX_PADDING + CONTACT_HEIGHT;
 
@@ -391,17 +396,14 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     
     [cell container].layer.masksToBounds = YES;
     
-    [[cell pic]setFrame:CGRectMake(0, 0, IMAGE_WIDTH, imageHeight)];
+    [[cell pic]setFrame:CGRectMake(BORDER_THICKNESS, BORDER_THICKNESS, IMAGE_WIDTH-(2 * BORDER_THICKNESS), imageHeight == 0 ? imageHeight : imageHeight - BORDER_THICKNESS)];
     [[cell title]setFrame:CGRectMake(BOX_PADDING, imageHeight+GAP_BETWEEN_TEXTS, maxTitleWidth, titleSize.height)];
     [[cell description]setFrame:CGRectMake  (BOX_PADDING, imageHeight + (GAP_BETWEEN_TEXTS * 2) + titleSize.height, MAX_DESCRIPTION_WIDTH, descriptionSize.height)];
     [[cell priceLabel]setFrame:CGRectMake(BOX_WIDTH-priceSize.width - PRICE_PADDING - BORDER_THICKNESS, BORDER_THICKNESS, priceSize.width + PRICE_PADDING, PRICE_HEIGHT)];
     [[cell contactSeller]setFrame:CGRectMake(BOX_WIDTH - CONTACT_WIDTH - BORDER_THICKNESS - CORNER_RADIUS, containerHeight - CONTACT_HEIGHT - BORDER_THICKNESS - CORNER_RADIUS, CONTACT_WIDTH, CONTACT_HEIGHT)];
-    [cell setPhoneNumber:[object objectForKey:@"postedBy"]];
+    [cell setItem:object];
     
     [cell sizeToFit];
-//     [[cell priceLabel] setText:[object objectForKey:@"description"];
-
-
 
     if ([indexPath row] >= [itemArray count] - 1) {
         [self addItemsToBottomFromIndex:[itemArray count]];
