@@ -11,8 +11,11 @@
 #import <Parse/Parse.h>
 #import "ParseData.h"
 #import "AppDelegate.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface NetworksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface NetworksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate,
+MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *networkTable;
 

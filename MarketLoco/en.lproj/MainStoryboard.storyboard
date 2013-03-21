@@ -91,13 +91,18 @@
                                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                 <color key="separatorColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="xaL-w6-yS4">
+                                <color key="color" red="0.0" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Cen-1c-uem" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="2zs-Hh-GVD"/>
+                            <constraint firstItem="xaL-w6-yS4" firstAttribute="top" secondItem="3" secondAttribute="top" constant="102" id="1Mm-pT-YOn"/>
                             <constraint firstItem="Cen-1c-uem" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="5bG-md-mqc"/>
                             <constraint firstItem="CTp-G7-hcD" firstAttribute="top" secondItem="Cen-1c-uem" secondAttribute="bottom" type="default" id="B1r-sA-w7I"/>
+                            <constraint firstItem="xaL-w6-yS4" firstAttribute="centerX" secondItem="CTp-G7-hcD" secondAttribute="centerX" type="default" id="Cwq-GT-LMH"/>
                             <constraint firstItem="Cen-1c-uem" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="JMz-Vb-PDT"/>
+                            <constraint firstItem="xaL-w6-yS4" firstAttribute="centerX" secondItem="Cen-1c-uem" secondAttribute="centerX" type="default" id="SQF-t7-Age"/>
                             <constraint firstItem="CTp-G7-hcD" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="Wzn-H6-ynN"/>
                             <constraint firstItem="CTp-G7-hcD" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="ZYd-Mi-3k4"/>
                             <constraint firstItem="CTp-G7-hcD" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="ioF-Lb-ptB"/>
@@ -111,6 +116,7 @@
                         <outlet property="categoryButton" destination="1Wy-dh-j4y" id="7cJ-2v-fFN"/>
                         <outlet property="locoBar" destination="fPx-Lq-L4z" id="w4T-jU-3dN"/>
                         <outlet property="networkButton" destination="qU1-kk-veA" id="27i-ci-oJD"/>
+                        <outlet property="spinner" destination="xaL-w6-yS4" id="HLv-hB-4t3"/>
                         <outlet property="tbView" destination="CTp-G7-hcD" id="g3t-tn-8zg"/>
                     </connections>
                 </viewController>
@@ -163,6 +169,41 @@
             <point key="canvasLocation" x="-802" y="-44"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CategoriesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoriesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="categoriesTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ECSlidingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
+        </class>
+        <class className="InitialViewController" superclassName="ECSlidingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="NetworksViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NetworksViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="networkTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealCategories:"/>
+                <relationship kind="action" name="revealNetworks:"/>
+                <relationship kind="outlet" name="categoryButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="locoBar" candidateClass="UINavigationItem"/>
+                <relationship kind="outlet" name="networkButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="tbView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

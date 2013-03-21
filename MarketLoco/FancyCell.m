@@ -58,7 +58,7 @@
     {
         [item fetchIfNeeded];
             
-        controller.body = [NSString stringWithFormat:@"I'm interested in \"%@\"", [item objectForKey:@"title"]];
+        controller.body = [NSString stringWithFormat:@"I'm interested in \"%@.\" ", [item objectForKey:@"title"]];
         controller.recipients = [NSArray arrayWithObject:[item objectForKey:@"postedBy"]];
         controller.messageComposeDelegate = [APP_DELEGATE viewController];
         [[APP_DELEGATE viewController] presentModalViewController:controller animated:YES];

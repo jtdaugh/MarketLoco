@@ -37,7 +37,7 @@
 @implementation ViewController
 
 @synthesize tbView,filteredItemArray,itemArray,locationManager,userLocation, itemPics,
-network, cellForReference, category, networkButton, categoryButton, locoBar, networkName;
+network, cellForReference, category, networkButton, categoryButton, locoBar, networkName, spinner;
 
 -(void) makeBarPretty {
     
@@ -52,7 +52,7 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     [super viewDidLoad];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Opened iOS App"];
-    
+    [spinner setHidden:NO];
     cellForReference = [[FancyCell alloc] init];
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"FancyView" owner:nil options:nil];
     
@@ -166,6 +166,7 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
             if (!error) {
                 // The find succeeded.
                 NSLog(@"Successfully retrieved the first %d listings.", objects.count);
+                [spinner setHidden:YES];
                 itemArray = objects;
                 [tbView reloadData];
                 itemPics = [NSMutableArray arrayWithCapacity:[itemArray count]];

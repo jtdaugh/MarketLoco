@@ -35,7 +35,7 @@
 
 -(void) getCategoriesFromParse {
     PFQuery *query = [PFQuery queryWithClassName:@"Categories"];
-    [query addAscendingOrder:@"name"];
+    [query addAscendingOrder:@"order"];
     [query whereKeyDoesNotExist:@"parentCategory"];
     [query setLimit:20];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

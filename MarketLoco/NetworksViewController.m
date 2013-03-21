@@ -48,7 +48,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[ParseData sharedParseData] networks] count];
+    return [[[ParseData sharedParseData] networks] count] + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -65,10 +65,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
     }
-    PFObject *object = [[[ParseData sharedParseData] networks] objectAtIndex:indexPath.row];  
-    NSString *title = [object objectForKey:@"longName"];
-    [cell.textLabel setText:title];
     [cell.textLabel setTextColor:[UIColor colorWithRed:250 green:250 blue:250 alpha:1]];
+    if (indexPath.row < [[[ParseData sharedParseData] networks] count]) {
+    
+        PFObject *object = [[[ParseData sharedParseData] networks] objectAtIndex:indexPath.row];
+        NSString *title = [object objectForKey:@"longName"];
+        [cell.textLabel setText:title];
+    } else {
+        [cell.textLabel setText:@"+ Add Your Campus"];
+    }
     
     return cell;
 }
@@ -76,23 +81,42 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath  {
-    PFObject *selected = [[[ParseData sharedParseData] networks] objectAtIndex:indexPath.row];
-    NSString *selectedNetwork = [selected objectForKey:@"namespace"];
-    [[NSUserDefaults standardUserDefaults] setObject:selectedNetwork forKey:@"network"];
-    [[NSUserDefaults standardUserDefaults] setObject:[selected objectForKey:@"name"] forKey:@"networkName"];
-    [[APP_DELEGATE viewController] pullNewestItemsForNetwork:selectedNetwork andCategory:@"All Items"];
-    [[[APP_DELEGATE viewController] tbView] scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:[NSString stringWithFormat:@"Picked School: %@", selectedNetwork]];
-;
-    [self.slidingViewController resetTopView];
+    if (indexPath.row < [[[ParseData sharedParseData] networks] count]) {
+
+        PFObject *selected = [[[ParseData sharedParseData] networks] objectAtIndex:indexPath.row];
+        NSString *selectedNetwork = [selected objectForKey:@"namespace"];
+        [[NSUserDefaults standardUserDefaults] setObject:selectedNetwork forKey:@"network"];
+        [[NSUserDefaults standardUserDefaults] setObject:[selected objectForKey:@"name"] forKey:@"networkName"];
+        [[APP_DELEGATE viewController] pullNewestItemsForNetwork:selectedNetwork andCategory:@"All Items"];
+        [[[APP_DELEGATE viewController] tbView] scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:[NSString stringWithFormat:@"Picked School: %@", selectedNetwork]];
+        [self.slidingViewController resetTopView];
+    } else{
+        Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
+        
+        if (messageClass != nil) {
+            MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+            if([MFMessageComposeViewController canSendText])
+            {
+                controller.body = [NSString stringWithFormat:@"I want Loco on my campus!"];
+                controller.recipients = [NSArray arrayWithObject:@"3107753248"];
+                controller.messageComposeDelegate = [APP_DELEGATE viewController];
+                [[APP_DELEGATE viewController] presentModalViewController:controller animated:YES];
+            }
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle: @"Sorry!"
+                                  message: @"You cannot send this message from this device."
+                                  delegate: nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+            
+        }
+    }
 
 }
-
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning

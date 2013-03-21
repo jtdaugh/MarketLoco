@@ -32,6 +32,7 @@ MFMessageComposeViewControllerDelegate>
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *networkButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *categoryButton;
 @property (nonatomic, strong) IBOutlet UINavigationItem *locoBar;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) NSString *networkName;
 
 -(void)pullNewestItemsForNetwork:(NSString *) newNetwork andCategory:(NSString *) newCategory;
