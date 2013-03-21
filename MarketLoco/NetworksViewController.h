@@ -10,6 +10,7 @@
 #import "ECSlidingViewController.h"
 #import <Parse/Parse.h>
 #import "ParseData.h"
+#import "AppDelegate.h"
 
 @interface NetworksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

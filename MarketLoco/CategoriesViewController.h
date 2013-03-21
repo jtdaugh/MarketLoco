@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
+#import <Parse/Parse.h>
+#import "ParseData.h"
+#import "AppDelegate.h"
 
-@interface CategoriesViewController : UIViewController
+@interface CategoriesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *categoriesTable;
 

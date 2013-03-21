@@ -17,7 +17,8 @@
 #import "NetworksViewController.h"
 #import "CategoriesViewController.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate,
+MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic,strong)CLLocation *userLocation;
@@ -26,11 +27,18 @@
 @property (nonatomic, retain) NSMutableArray *itemPics;
 @property (strong,nonatomic) NSMutableArray *filteredItemArray;
 @property (nonatomic, strong) NSString *network;
+@property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) FancyCell *cellForReference;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *networkButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *categoryButton;
+@property (nonatomic, strong) IBOutlet UINavigationItem *locoBar;
+@property (nonatomic, strong) NSString *networkName;
 
--(void) pullNewestItems;
+-(void)pullNewestItemsForNetwork:(NSString *) newNetwork andCategory:(NSString *) newCategory;
 -(void)addItemsToBottomFromIndex:(int)startIndex;
+-(void)getMoreObjectsWithQuery:(PFQuery *)query andStartIndex:(int) startIndex;
 -(void)geoQueryForNetwork;
+-(void) makeBarPretty;
 
 - (IBAction)revealNetworks:(id)sender;
 - (IBAction)revealCategories:(id)sender;

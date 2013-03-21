@@ -55,10 +55,9 @@
     if([MFMessageComposeViewController canSendText])
     {
         controller.body = @"I saw your item on MarketLoco. I'd like to buy it.";
-        controller.recipients = phoneNumber;
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        controller.messageComposeDelegate = appDelegate.viewController;
-        [appDelegate.viewController presentModalViewController:controller animated:YES];
+        controller.recipients = [NSArray arrayWithObject:phoneNumber];
+        controller.messageComposeDelegate = [APP_DELEGATE viewController];
+        [[APP_DELEGATE viewController] presentModalViewController:controller animated:YES];
     }
     //do nothing (OS will alert user of error)
 }
@@ -66,18 +65,6 @@
 
 
 
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.viewController presentModalViewController:controller animated:YES];
-    [appDelegate.viewController dismissModalViewControllerAnimated:YES];
-    
-    if (result == MessageComposeResultCancelled)
-        NSLog(@"Message cancelled");
-    else if (result == MessageComposeResultSent)
-        NSLog(@"Message sent");
-    else
-        NSLog(@"Message failed");
-    }
+
 
 @end

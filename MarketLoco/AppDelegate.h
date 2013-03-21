@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
+#define APP_DELEGATE (AppDelegate *)[[UIApplication sharedApplication] delegate]
+
 @class ViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

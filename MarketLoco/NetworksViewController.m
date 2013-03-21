@@ -7,6 +7,7 @@
 //
 
 #import "NetworksViewController.h"
+#import "ViewController.h"
 
 @interface NetworksViewController ()
 
@@ -29,10 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[self networkTable]setDataSource:self];
-    [[self networkTable]setDelegate:self];
-    
-    [self.slidingViewController setAnchorLeftPeekAmount:-40.0f];
+
+    [self.slidingViewController setAnchorLeftPeekAmount:40.0f];
     self.slidingViewController.underRightWidthLayout = ECFullWidth;
 
 	// Do any additional setup after loading the view.
@@ -67,7 +66,7 @@
         
     }
     PFObject *object = [[[ParseData sharedParseData] networks] objectAtIndex:indexPath.row];  
-    NSString *title = [object objectForKey:@"name"];
+    NSString *title = [object objectForKey:@"longName"];
     [cell.textLabel setText:title];
     return cell;
 }
@@ -75,7 +74,15 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath  {
-    //do nothing
+    PFObject *selected = [[[ParseData sharedParseData] networks] objectAtIndex:indexPath.row];
+    NSString *selectedNetwork = [selected objectForKey:@"namespace"];
+    [[NSUserDefaults standardUserDefaults] setObject:selectedNetwork forKey:@"network"];
+    [[NSUserDefaults standardUserDefaults] setObject:[selected objectForKey:@"name"] forKey:@"networkName"];
+    [[APP_DELEGATE viewController] pullNewestItemsForNetwork:selectedNetwork andCategory:@"All Items"];
+    [[[APP_DELEGATE viewController] tbView] scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+
+    [self.slidingViewController resetTopView];
+
 }
 
 

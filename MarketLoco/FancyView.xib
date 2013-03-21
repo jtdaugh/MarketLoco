@@ -81,7 +81,7 @@
 											<bytes key="NSWhite">MQA</bytes>
 										</object>
 										<int key="IBUIBaselineAdjustment">0</int>
-										<int key="IBUINumberOfLines">20</int>
+										<int key="IBUINumberOfLines">100</int>
 										<int key="IBUILineBreakMode">0</int>
 										<object class="IBUIFontDescription" key="IBUIFontDescription">
 											<string key="name">HelveticaNeue-Light</string>
@@ -103,7 +103,6 @@
 										<string key="NSFrame">{{9, 200}, {262, 22}}</string>
 										<reference key="NSSuperview" ref="754895492"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -173,21 +172,25 @@
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="5590823"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<object class="NSColor" key="IBUIBackgroundColor">
-											<int key="NSColorSpace">1</int>
-											<bytes key="NSRGB">MCAwLjQgMC42AA</bytes>
-										</object>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
-										<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 										<string key="IBUINormalTitle">Contact Seller</string>
 										<reference key="IBUIHighlightedTitleColor" ref="899935308"/>
 										<reference key="IBUINormalTitleColor" ref="899935308"/>
 										<object class="NSColor" key="IBUINormalTitleShadowColor">
 											<int key="NSColorSpace">3</int>
 											<bytes key="NSWhite">MC41AA</bytes>
+										</object>
+										<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="36163313">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">contactSellerPressed.png</string>
+										</object>
+										<reference key="IBUISelectedBackgroundImage" ref="36163313"/>
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">contactSeller.png</string>
 										</object>
 										<reference key="IBUIFontDescription" ref="560648139"/>
 										<reference key="IBUIFont" ref="766734403"/>
@@ -367,6 +370,7 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="130.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="132.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="2" key="132.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.CustomClassName">FancyCell</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -441,6 +445,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="contactSeller.png">{160, 40}</string>
+			<string key="contactSellerPressed.png">{160, 40}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>
