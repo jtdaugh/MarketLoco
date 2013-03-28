@@ -67,8 +67,7 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     
     [ParseData sharedParseData];
     [self makeBarPretty];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate setViewController:self];
+    [APP_DELEGATE setViewController:self];
     self.tbView.delegate = self;
     self.tbView.dataSource = self;
     NSString *prevNetwork = [[NSUserDefaults standardUserDefaults]objectForKey:@"network"];
@@ -160,11 +159,11 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
                 
         PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects: globalQuery, localQuery, nil]];
         [query orderByDescending:@"premiumListing"];
-        [query addDescendingOrder:@"updatedAt"];
+        [query addDescendingOrder:@"createdAt"];
         if (![category isEqualToString:@"All Items"]) {
             [query whereKey:@"category" equalTo:category];
         }
-        [query setLimit:30];
+        [query setLimit:20];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             currentlyLoadingMore = false;
             if (!error) {
@@ -202,14 +201,24 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
 
 
 -(void)addItemsToBottomFromIndex:(int)startIndex {
-    PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
-    [query orderByDescending:@"updatedAt"];
+    PFQuery *globalQuery = [PFQuery queryWithClassName:@"Listings"];
+    [globalQuery whereKeyDoesNotExist:@"network"];
+    
+    PFQuery *localQuery = [PFQuery queryWithClassName:@"Listings"];
+    [localQuery whereKey:@"network" equalTo:network];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects: globalQuery, localQuery, nil]];
+    [query orderByDescending:@"premiumListing"];
+    [query addDescendingOrder:@"createdAt"];
+    if (![category isEqualToString:@"All Items"]) {
+        [query whereKey:@"category" equalTo:category];
+    }
     query.skip = startIndex;
     [query whereKey:@"network" equalTo:network];
     if (![category isEqualToString:@"All Items"]) {
         [query whereKey:@"category" equalTo:category];
     }
-    [query setLimit:30];
+    [query setLimit:20];
     [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
         if (number > startIndex) {
             [self getMoreObjectsWithQuery:query andStartIndex:startIndex];

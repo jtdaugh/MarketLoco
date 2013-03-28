@@ -14,10 +14,14 @@
 #define MIXPANEL_TOKEN @"69253db17590ba31bc8ef5dcbbecfdc8"
 
 @class ViewController;
+@class NetworksViewController;
+@class CategoriesViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) ViewController *viewController;
+@property (nonatomic, strong) NetworksViewController *networkViewController;
+@property (nonatomic, strong) CategoriesViewController *categoriesViewController;
 
 @end

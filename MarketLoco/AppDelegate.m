@@ -10,7 +10,7 @@
 
 @implementation AppDelegate
 
-@synthesize viewController;
+@synthesize viewController, networkViewController, categoriesViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

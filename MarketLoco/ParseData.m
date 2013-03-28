@@ -7,6 +7,8 @@
 //
 
 #import "ParseData.h"
+#import "NetworksViewController.h"
+#import "CategoriesViewController.h"
 
 @implementation ParseData
 
@@ -43,6 +45,7 @@
             // The find succeeded.
             NSLog(@"Successfully retrieved %d categories", objects.count);
             categories = objects;
+            [[[APP_DELEGATE categoriesViewController] categoriesTable] reloadData];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -60,6 +63,7 @@
             // The find succeeded.
             NSLog(@"Successfully retrieved %d networks", objects.count);
             networks = objects;
+            [[[APP_DELEGATE networkViewController] networkTable] reloadData];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);

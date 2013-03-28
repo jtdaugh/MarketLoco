@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [APP_DELEGATE setNetworkViewController:self];
     [self.slidingViewController setAnchorLeftPeekAmount:40.0f];
     self.slidingViewController.underRightWidthLayout = ECFullWidth;
 

@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [APP_DELEGATE setCategoriesViewController:self];
     [self.categoriesTable setDataSource:self];
 	[self.categoriesTable setDelegate:self];
     self.peekRightAmount = 40.0f;
