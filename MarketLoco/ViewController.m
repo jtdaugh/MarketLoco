@@ -27,6 +27,8 @@
 #define CONTACT_HEIGHT 40
 #define CONTACT_WIDTH 160
 
+#define LOADING_ROW_HEIGHT 80
+
 
 @interface ViewController ()
 
@@ -34,28 +36,20 @@
 
 @implementation ViewController
 
-@synthesize tbView,filteredItemArray,itemArray,locationManager,userLocation, itemPics,
+@synthesize tbView,filteredItemArray,itemArray,locationManager,userLocation, itemPics, endResultsText,
 network, cellForReference, category, networkButton, categoryButton, locoBar, networkName, spinner;
-
-
--(void) makeBarPretty {
-    
-     UIView *locoBarView = [[UIView alloc] initWithFrame:CGRectMake(80, 10, 70, 20)];
-     UIImageView *locoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"locologo.png"]];
-    [locoBarView addSubview:locoView];
-    [locoBar setTitleView:locoBarView];
-}
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    endResults = false;
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Opened iOS App"];
-    [spinner setHidden:NO];
+    [spinner setHidden:YES];
+    endResultsText = @"Loading...";
     cellForReference = [[FancyCell alloc] init];
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"FancyView" owner:nil options:nil];
-    
     for(id currentObject in topLevelObjects)
     {
         if([currentObject isKindOfClass:[FancyCell class]])
@@ -64,7 +58,6 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
             break;
         }
     }
-    
     [ParseData sharedParseData];
     [self makeBarPretty];
     [APP_DELEGATE setViewController:self];
@@ -72,7 +65,6 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     self.tbView.dataSource = self;
     NSString *prevNetwork = [[NSUserDefaults standardUserDefaults]objectForKey:@"network"];
     networkName = [[NSUserDefaults standardUserDefaults]objectForKey:@"networkName"];
-
     if (!prevNetwork) {
         locationManager = [[CLLocationManager alloc] init];
         [locationManager startUpdatingLocation];
@@ -82,44 +74,20 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
         
         [self pullNewestItemsForNetwork:prevNetwork andCategory:@"All Items" ];
     }
-   
-    
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
-    
     if (![self.slidingViewController.underRightViewController isKindOfClass:[NetworksViewController class]]) {
         self.slidingViewController.underRightViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Networks"];
     }
-    
     if (![self.slidingViewController.underLeftViewController isKindOfClass:[CategoriesViewController class]]) {
         self.slidingViewController.underLeftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Categories"];
     }
-    
     [self.view addGestureRecognizer:self.slidingViewController.panGesture];
-
-    
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
-{
-    NSLog(@"Location: %@", [newLocation description]);
-    userLocation = newLocation;
-    [locationManager stopUpdatingLocation];
-    [self geoQueryForNetwork];
-}
-
+//-------------------------------------- QUERIES & RELATED CODE ----------------------------------------------
 
 -(void)geoQueryForNetwork {
     PFQuery *query = [PFQuery queryWithClassName:@"Networks"];
@@ -140,37 +108,47 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     [self pullNewestItemsForNetwork:locNetwork andCategory:@"All Items"];
 }
 
+-(PFQuery *)createQuery {
+    PFQuery *globalQuery = [PFQuery queryWithClassName:@"Listings"];
+    [globalQuery whereKeyDoesNotExist:@"network"];
+    
+    PFQuery *localQuery = [PFQuery queryWithClassName:@"Listings"];
+    [localQuery whereKey:@"network" equalTo:network];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects: globalQuery, localQuery, nil]];
+    [query orderByDescending:@"premiumListing"];
+    [query addDescendingOrder:@"createdAt"];
+    if (![category isEqualToString:@"All Items"]) {
+        [query whereKey:@"category" equalTo:category];
+    }
+    [query setLimit:20];
+    return query;
+}
 
 -(void)pullNewestItemsForNetwork:(NSString *) newNetwork andCategory:(NSString *) newCategory {
 
     if (!network || !category || !([network isEqualToString:newNetwork] && [category isEqualToString:newCategory])) {
- 
         network = newNetwork;
         category = newCategory;
         networkName = [[NSUserDefaults standardUserDefaults] objectForKey:@"networkName"];
         [[self networkButton] setTitle:networkName];
         [[self categoryButton] setTitle:category];
-        
-        PFQuery *globalQuery = [PFQuery queryWithClassName:@"Listings"];
-        [globalQuery whereKeyDoesNotExist:@"network"];
-        
-        PFQuery *localQuery = [PFQuery queryWithClassName:@"Listings"];
-        [localQuery whereKey:@"network" equalTo:network];
-                
-        PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects: globalQuery, localQuery, nil]];
-        [query orderByDescending:@"premiumListing"];
-        [query addDescendingOrder:@"createdAt"];
-        if (![category isEqualToString:@"All Items"]) {
-            [query whereKey:@"category" equalTo:category];
-        }
-        [query setLimit:20];
+        endResults = false;
+        PFQuery *query = [self createQuery];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             currentlyLoadingMore = false;
             if (!error) {
                 // The find succeeded.
+                
                 NSLog(@"Successfully retrieved the first %d listings.", objects.count);
                 [spinner setHidden:YES];
                 itemArray = objects;
+                if ([objects count] == 0) {
+                    endResultsText = @"No Results...";
+                    endResults = true;
+                } else {
+                    endResultsText = @"Loading more...";
+                }
                 [tbView reloadData];
                 itemPics = [NSMutableArray arrayWithCapacity:[itemArray count]];
                 for(int i = 0; i < [itemArray count]; i++) [itemPics addObject: [NSNull null]];
@@ -183,10 +161,13 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
                                               [[itemArray objectAtIndex:i]
                                                objectForKey:@"picUrl"]]];
                             
-                            if ( data == nil ) return;
-                            [itemPics replaceObjectAtIndex:i withObject:data];
-                            if (i <= 2) {
-                                [[self tbView] reloadData];
+                            if ( data != nil ) {
+                                if (i < [itemPics count]) {
+                                    [itemPics replaceObjectAtIndex:i withObject:data];
+                                    if (i <= 2) {
+                                        [[self tbView] reloadData];
+                                    }
+                                }
                             }
                         }
                     });
@@ -201,33 +182,30 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
 
 
 -(void)addItemsToBottomFromIndex:(int)startIndex {
-    PFQuery *globalQuery = [PFQuery queryWithClassName:@"Listings"];
-    [globalQuery whereKeyDoesNotExist:@"network"];
-    
-    PFQuery *localQuery = [PFQuery queryWithClassName:@"Listings"];
-    [localQuery whereKey:@"network" equalTo:network];
-    
-    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects: globalQuery, localQuery, nil]];
-    [query orderByDescending:@"premiumListing"];
-    [query addDescendingOrder:@"createdAt"];
-    if (![category isEqualToString:@"All Items"]) {
-        [query whereKey:@"category" equalTo:category];
-    }
+    PFQuery *query = [self createQuery];
     query.skip = startIndex;
-    [query whereKey:@"network" equalTo:network];
-    if (![category isEqualToString:@"All Items"]) {
-        [query whereKey:@"category" equalTo:category];
-    }
-    [query setLimit:20];
     [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
-        if (number > startIndex) {
+        if (number >
+            startIndex) {
             [self getMoreObjectsWithQuery:query andStartIndex:startIndex];
+        }
+        else {
+            if ([itemArray count] > 0) {
+                endResultsText = @"End of Results...";
+                endResults = true;
+            }
+            else {
+                endResultsText = @"No Results...";
+                endResults = true;
+            }
+            [tbView reloadData];
         }
     }];
 }
 
 
 -(void)getMoreObjectsWithQuery:(PFQuery *)query andStartIndex:(int) startIndex {
+    endResults = false;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         currentlyLoadingMore = false;
         if (!error) {
@@ -248,7 +226,9 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
                                            objectForKey:@"picUrl"]]];
                         
                         if ( data != nil ) {
-                            [itemPics replaceObjectAtIndex:realIndex withObject:data];
+                            if (i < [itemPics count]) {
+                                [itemPics replaceObjectAtIndex:realIndex withObject:data];
+                            }
                         }
                     }
                 });
@@ -260,7 +240,10 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     }];
 }
 
-//UITableViewMethods
+
+
+//----------------------------- TABLE VIEW DELEGATE & DATA SOURCE METHODS -------------------------------------
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
@@ -268,59 +251,78 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [itemArray count];
+    return [itemArray count] + 1;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PFObject *object = [itemArray objectAtIndex:[indexPath row]];
-
-    int imageHeight = 0;
-    NSNumber * img = [object objectForKey:@"uploadedImage"];
-    if (img == [NSNumber numberWithBool:YES]) {
-        imageHeight = IMAGE_HEIGHT;
+    if ([indexPath row] < [itemArray count]) {
+        return [self heightForFancyCellAtRow:[indexPath row]];
     }
-    
-    NSString *descrip = [object objectForKey:@"description"];
-    if ([descrip length] > 300) {
-        descrip = [NSString stringWithFormat:@"%@...",[descrip substringToIndex:300]];
-    }
-
-    UIFont *daFont = [[self cellForReference] description].font;
-    CGSize descriptionSize = [descrip sizeWithFont:daFont
-                                      constrainedToSize:CGSizeMake(MAX_DESCRIPTION_WIDTH, MAX_DESCRIPTION_HEIGHT)
-                                      lineBreakMode:NSLineBreakByWordWrapping];
-    
-    NSString *price = @"$";
-    NSString *tempPrice = [object objectForKey:@"price"];
-    if (tempPrice != [NSNull null])
-        price = [price stringByAppendingString:tempPrice];
-    
-    CGSize priceSize = [price   sizeWithFont:[cellForReference priceLabel].font
-                                constrainedToSize:CGSizeMake(MAX_PRICE_WIDTH, PRICE_HEIGHT)
-                                lineBreakMode:NSLineBreakByWordWrapping];
-    
-    int maxTitleWidth = MAX_TITLE_WIDTH;
-    if (imageHeight == 0) {
-        maxTitleWidth -= (priceSize.width + PRICE_PADDING + 5);
-    }
-    
-    CGSize titleSize = [[object objectForKey:@"title" ] sizeWithFont:[cellForReference title].font
-                                                        constrainedToSize:CGSizeMake(maxTitleWidth, MAX_TITLE_HEIGHT)
-                                                        lineBreakMode:NSLineBreakByWordWrapping];
-    
-    return imageHeight + titleSize.height + descriptionSize.height +
-            GAP_BETWEEN_CELLS + (2 * GAP_BETWEEN_TEXTS) + BOX_PADDING + CONTACT_HEIGHT;
+    return LOADING_ROW_HEIGHT;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([indexPath row] >= [itemArray count]) {
+        if (!(currentlyLoadingMore || endResults)) {
+            currentlyLoadingMore = true;
+            [self addItemsToBottomFromIndex:[itemArray count]];
+        }
+        return [self endOfResultsCell];
+    }
+    else {
+        return [self fancyCellAtRow:[indexPath row]];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // do nothing
+}
+
+
+
+
+//----------------------------------- TABLE VIEW CELL HELPER METHODS ------------------------------------------
+
+-(CGFloat)heightForFancyCellAtRow:(NSInteger)row {
+    PFObject *object = [itemArray objectAtIndex:row];
+    int imageHeight = 0;
+    NSNumber * img = [object objectForKey:@"uploadedImage"];
+    if (img == [NSNumber numberWithBool:YES]) {
+        imageHeight = IMAGE_HEIGHT;
+    }
+    NSString *descrip = [object objectForKey:@"description"];
+    if ([descrip length] > 300) {
+        descrip = [NSString stringWithFormat:@"%@...",[descrip substringToIndex:300]];
+    }
+    UIFont *daFont = [[self cellForReference] description].font;
+    CGSize descriptionSize = [descrip sizeWithFont:daFont
+                              constrainedToSize:CGSizeMake(MAX_DESCRIPTION_WIDTH, MAX_DESCRIPTION_HEIGHT)
+                              lineBreakMode:NSLineBreakByWordWrapping];
+    NSString *price = @"$";
+    NSString *tempPrice = [object objectForKey:@"price"];
+    if (tempPrice != [NSNull null])
+        price = [price stringByAppendingString:tempPrice];
     
+    CGSize priceSize = [price sizeWithFont:[cellForReference priceLabel].font
+                              constrainedToSize:CGSizeMake(MAX_PRICE_WIDTH, PRICE_HEIGHT)
+                              lineBreakMode:NSLineBreakByWordWrapping];
+    int maxTitleWidth = MAX_TITLE_WIDTH;
+    if (imageHeight == 0) {
+        maxTitleWidth -= (priceSize.width + PRICE_PADDING + 5);
+    }
+    CGSize titleSize = [[object objectForKey:@"title" ] sizeWithFont:[cellForReference title].font
+                                                   constrainedToSize:CGSizeMake(maxTitleWidth, MAX_TITLE_HEIGHT)
+                                                       lineBreakMode:NSLineBreakByWordWrapping];
+    return imageHeight + titleSize.height + descriptionSize.height +
+    GAP_BETWEEN_CELLS + (2 * GAP_BETWEEN_TEXTS) + BOX_PADDING + CONTACT_HEIGHT;
+}
+
+-(UITableViewCell *)fancyCellAtRow:(NSInteger)row {
     static NSString *CellIdentifier = @"fancyCell";
-    
-    FancyCell *cell = (FancyCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+    FancyCell *cell = (FancyCell *) [tbView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil){
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"FancyView" owner:nil options:nil];
         for(id currentObject in topLevelObjects)
@@ -332,12 +334,10 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
             }
         }
     }
-    PFObject *object = [itemArray objectAtIndex:[indexPath row]];
-    NSData * imgData = [itemPics objectAtIndex:[indexPath row]];
-    
+    PFObject *object = [itemArray objectAtIndex:row];
+    NSData * imgData = [itemPics objectAtIndex:row];
     int imageHeight = 0;
     NSNumber *imgExists = [object objectForKey:@"uploadedImage"];
-    
     if (imgExists == [NSNumber numberWithBool:YES]) {
         imageHeight = IMAGE_HEIGHT;
         if (imgData != [NSNull null]) {
@@ -353,89 +353,89 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     NSString *title = [object objectForKey:@"title"];
     NSString *price = @"$";
     price = [price stringByAppendingString:[object objectForKey:@"price"]];
-     
     [[cell title] setText:title];
     [[cell description] setText:description];
     [[cell priceLabel] setText:price];
-
     CGSize descriptionSize = [description sizeWithFont:[cell description].font
-                                            constrainedToSize:CGSizeMake(MAX_DESCRIPTION_WIDTH, MAX_DESCRIPTION_HEIGHT)
-                                            lineBreakMode:NSLineBreakByWordWrapping];
-    
+                                     constrainedToSize:CGSizeMake(MAX_DESCRIPTION_WIDTH, MAX_DESCRIPTION_HEIGHT)
+                                         lineBreakMode:NSLineBreakByWordWrapping];
     CGSize priceSize = [price sizeWithFont:[cell priceLabel].font
-                                constrainedToSize: CGSizeMake(MAX_PRICE_WIDTH, PRICE_HEIGHT)
-                                lineBreakMode:NSLineBreakByWordWrapping];
-    
-    
+                         constrainedToSize: CGSizeMake(MAX_PRICE_WIDTH, PRICE_HEIGHT)
+                             lineBreakMode:NSLineBreakByWordWrapping];
     int maxTitleWidth = MAX_TITLE_WIDTH;
     if (imageHeight == 0) {
         maxTitleWidth -= (priceSize.width + PRICE_PADDING + 5);
     }
-    
     CGSize titleSize = [title sizeWithFont:[cell title].font
-                            constrainedToSize:CGSizeMake(maxTitleWidth, MAX_TITLE_HEIGHT)
+                         constrainedToSize:CGSizeMake(maxTitleWidth, MAX_TITLE_HEIGHT)
                              lineBreakMode:NSLineBreakByWordWrapping];
-  
-//    NSLog(@"description Size- h:%f , w:%f", descriptionSize.height, descriptionSize.width);
-//    NSLog(@"title Size- h:%f , w:%f", titleSize.height, titleSize.width);
-//    NSLog(@"price Size- h:%f , w:%f", descriptionSize.height, descriptionSize.width);
-//    NSLog(@"imageHeight:%d", imageHeight);
-    
     int containerHeight = imageHeight + descriptionSize.height + titleSize.height +
-                            (GAP_BETWEEN_TEXTS * 2) + BOX_PADDING + CONTACT_HEIGHT;
-
+    (GAP_BETWEEN_TEXTS * 2) + BOX_PADDING + CONTACT_HEIGHT;
     [[cell container] setFrame:CGRectMake((320-(BOX_WIDTH))/2,
                                           GAP_BETWEEN_CELLS,
                                           BOX_WIDTH,
                                           containerHeight)];
-    
     [cell container].layer.cornerRadius = CORNER_RADIUS;
     [cell container].layer.borderWidth = BORDER_THICKNESS;
     [cell container].layer.borderColor = [UIColor colorWithRed:0.2 green:0.4 blue:0.4 alpha:.25].CGColor;
-    
-    
     [cell container].layer.masksToBounds = YES;
-    
     [[cell pic]setFrame:CGRectMake(BORDER_THICKNESS,
                                    BORDER_THICKNESS,
                                    IMAGE_WIDTH-(2 * BORDER_THICKNESS),
                                    imageHeight == 0 ? imageHeight : imageHeight - BORDER_THICKNESS)];
-    
     [[cell title]setFrame:CGRectMake(BOX_PADDING,
                                      imageHeight+GAP_BETWEEN_TEXTS,
                                      maxTitleWidth,
                                      titleSize.height)];
-    
     [[cell description]setFrame:CGRectMake  (BOX_PADDING,
                                              imageHeight + (GAP_BETWEEN_TEXTS * 2) + titleSize.height,
                                              MAX_DESCRIPTION_WIDTH,
                                              descriptionSize.height)];
-    
     [[cell priceLabel]setFrame:CGRectMake(BOX_WIDTH-priceSize.width - PRICE_PADDING - BORDER_THICKNESS,
                                           BORDER_THICKNESS,
                                           priceSize.width + PRICE_PADDING,
                                           PRICE_HEIGHT)];
-    
     [[cell contactSeller]setFrame:CGRectMake(BOX_WIDTH - CONTACT_WIDTH - BORDER_THICKNESS - CORNER_RADIUS,
                                              containerHeight - CONTACT_HEIGHT - BORDER_THICKNESS - CORNER_RADIUS,
                                              CONTACT_WIDTH,
                                              CONTACT_HEIGHT)];
     [cell setItem:object];
     [cell sizeToFit];
-    
-    //infinite scroll
-    if ([indexPath row] >= [itemArray count] - 1) {
-        if (!currentlyLoadingMore)
-            currentlyLoadingMore = true;
-            [self addItemsToBottomFromIndex:[itemArray count]];
+    return cell;
+}
+
+-(UITableViewCell *)endOfResultsCell {
+    NSString *CellIdentifier = @"endResultsCell";
+    UITableViewCell *cell = [tbView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithFrame:CGRectMake(0, 0, 320, LOADING_ROW_HEIGHT)];
     }
-    
+    UILabel *status = [[UILabel alloc]initWithFrame:CGRectMake(20, 20, 280, 40)];
+    [status setTextAlignment:NSTextAlignmentCenter];
+    [status setText:endResultsText];
+    [cell addSubview:status];
     return cell;
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // do nothing
+//------------------------------------ OTHER MISCELLANEOUS METHODS --------------------------------------------
+
+-(void) makeBarPretty {
+    UIView *locoBarView = [[UIView alloc] initWithFrame:CGRectMake(80, 10, 70, 20)];
+    UIImageView *locoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"locologo.png"]];
+    [locoBarView addSubview:locoView];
+    [locoBar setTitleView:locoBarView];
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"Location: %@", [newLocation description]);
+    userLocation = newLocation;
+    [locationManager stopUpdatingLocation];
+    [self geoQueryForNetwork];
 }
 
 
@@ -463,5 +463,13 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
     else
         NSLog(@"Message failed");
 }
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end

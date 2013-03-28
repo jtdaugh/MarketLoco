@@ -88,6 +88,10 @@
     NSString *tempNetwork = [[APP_DELEGATE viewController] network];
     if (!tempNetwork) tempNetwork = @"umich";
     [[APP_DELEGATE viewController] pullNewestItemsForNetwork:tempNetwork andCategory:title];
+    [[[APP_DELEGATE viewController] itemArray] removeAllObjects];
+    [[[APP_DELEGATE viewController] itemPics] removeAllObjects];
+    [[APP_DELEGATE viewController] setEndResultsText:@"Loading..."];
+    [[[APP_DELEGATE viewController] tbView] reloadData];
     [[[APP_DELEGATE viewController] tbView] scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:[NSString stringWithFormat:@"Picked Category: %@", title]];

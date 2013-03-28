@@ -20,6 +20,7 @@
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate,
 MFMessageComposeViewControllerDelegate> {
     bool currentlyLoadingMore;
+    bool endResults;
 }
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -36,12 +37,18 @@ MFMessageComposeViewControllerDelegate> {
 @property (nonatomic, strong) IBOutlet UINavigationItem *locoBar;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) NSString *networkName;
+@property (nonatomic, strong) NSString *endResultsText;
+
 
 -(void)pullNewestItemsForNetwork:(NSString *) newNetwork andCategory:(NSString *) newCategory;
 -(void)addItemsToBottomFromIndex:(int)startIndex;
 -(void)getMoreObjectsWithQuery:(PFQuery *)query andStartIndex:(int) startIndex;
 -(void)geoQueryForNetwork;
 -(void)makeBarPretty;
+-(CGFloat)heightForFancyCellAtRow:(NSInteger)row;
+-(CGFloat)heightForEndOfResultsRow;
+-(UITableViewCell *)fancyCellAtRow:(NSInteger)row;
+-(UITableViewCell *)endOfResultsCell;
 
 - (IBAction)revealNetworks:(id)sender;
 - (IBAction)revealCategories:(id)sender;
