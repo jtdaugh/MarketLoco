@@ -475,15 +475,15 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
 #define TAG_FB 1
 #define TAG_INVITE 2
 #define TAG_RATE 3
-#define FB_LIKE_TITLE @"We like you!"
-#define FB_LIKE_MESSAGE @"Do you like us? Check out our Facebook page."
-#define INVITE_TITLE @"Invite your friends!"
-#define INVITE_MESSAGE @"Help spread Loco across your campus"
-#define INVITE_SMS_BODY @"Check out Loco on the app store. Its the best way to buy and sell stuff on campus!"
-#define RATE_TITLE @"Enjoying the app?"
-#define RATE_MESSAGE @"Take a minute to rate it on the app store. It means a lot to us!"
-#define YES_TEXT @"Sure!"
-#define LATER_TEXT @"Maybe Later"
+#define FB_LIKE_TITLE @"We like you, do you like us?"
+#define FB_LIKE_MESSAGE @"Like us on FB to share the love."
+#define INVITE_TITLE @"Let's Get Loco!"
+#define INVITE_MESSAGE @"Invite friends to start the party on your campus"
+#define INVITE_SMS_BODY @"Get Loco, the easiest way to buy stuff on campus. http://marketloco.com"
+#define RATE_TITLE @"Hook us up"
+#define RATE_MESSAGE @"Rate us on the App Store - it means a lot to us!"
+#define YES_TEXT @"Let's do it!"
+#define LATER_TEXT @"Nope"
 
 -(void) growthHacksAfterClick {
     int contacts = contactPressed;
