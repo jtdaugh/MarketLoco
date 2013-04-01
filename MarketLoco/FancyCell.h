@@ -12,7 +12,7 @@
 #import <Parse/Parse.h>
 //#import "AppDelegate.h"
 
-@interface FancyCell : UITableViewCell 
+@interface FancyCell : UITableViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel *title;
 @property (nonatomic, strong) IBOutlet UILabel *description;
@@ -21,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet UIView *container;
 @property (nonatomic, strong) IBOutlet UIButton *contactSeller;
 @property (nonatomic, strong) PFObject *item;
+@property (nonatomic, strong) NSNumber *callNotText;
 
 -(IBAction)contactSellerClicked;
 -(void)displaySMSComposerSheet;

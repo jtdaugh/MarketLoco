@@ -9,6 +9,9 @@
 #import "CategoriesViewController.h"
 #import "ViewController.h"
 
+#define PEEK_AMOUNT 140.0f
+
+
 @interface CategoriesViewController ()
 
 @property (nonatomic, assign) CGFloat peekRightAmount;
@@ -34,7 +37,7 @@
     [APP_DELEGATE setCategoriesViewController:self];
     [self.categoriesTable setDataSource:self];
 	[self.categoriesTable setDelegate:self];
-    self.peekRightAmount = 40.0f;
+    self.peekRightAmount = PEEK_AMOUNT;
     [self.slidingViewController setAnchorRightPeekAmount:self.peekRightAmount];
     self.slidingViewController.underLeftWidthLayout = ECVariableRevealWidth;
 }

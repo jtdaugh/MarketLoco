@@ -9,6 +9,8 @@
 #import "NetworksViewController.h"
 #import "ViewController.h"
 
+#define PEEK_AMOUNT 50.0f
+
 @interface NetworksViewController ()
 
 @end
@@ -32,7 +34,7 @@
 {
     [super viewDidLoad];
     [APP_DELEGATE setNetworkViewController:self];
-    [self.slidingViewController setAnchorLeftPeekAmount:40.0f];
+    [self.slidingViewController setAnchorLeftPeekAmount:PEEK_AMOUNT];
     self.slidingViewController.underRightWidthLayout = ECFullWidth;
 
 	// Do any additional setup after loading the view.

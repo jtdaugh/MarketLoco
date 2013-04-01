@@ -18,9 +18,10 @@
 #import "CategoriesViewController.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate,
-MFMessageComposeViewControllerDelegate> {
+MFMessageComposeViewControllerDelegate, UIAlertViewDelegate> {
     bool currentlyLoadingMore;
     bool endResults;
+    NSInteger contactPressed;
 }
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -35,7 +36,6 @@ MFMessageComposeViewControllerDelegate> {
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *networkButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *categoryButton;
 @property (nonatomic, strong) IBOutlet UINavigationItem *locoBar;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) NSString *networkName;
 @property (nonatomic, strong) NSString *endResultsText;
 
@@ -45,6 +45,20 @@ MFMessageComposeViewControllerDelegate> {
 -(void)getMoreObjectsWithQuery:(PFQuery *)query andStartIndex:(int) startIndex;
 -(void)geoQueryForNetwork;
 -(void)makeBarPretty;
+-(void)initContactPressedCount;
+-(void)getReferenceFancyCell;
+-(void)initMixpanel;
+-(void)setupSlidingControl;
+-(void)setInitialNetwork;
+-(void)growthHacksAfterClick;
+-(void)askToLikeUsOnFB;
+-(void)askToInviteFriends;
+-(void)askToRateUs;
+-(void)openFBPage;
+-(void)inviteFriendsPopup;
+-(void)doRateApp;
+
+
 -(CGFloat)heightForFancyCellAtRow:(NSInteger)row;
 -(CGFloat)heightForEndOfResultsRow;
 -(UITableViewCell *)fancyCellAtRow:(NSInteger)row;

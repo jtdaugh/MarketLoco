@@ -11,8 +11,7 @@
 
 @implementation FancyCell
 
-@synthesize title, description, priceLabel, pic, container, contactSeller, item;
-
+@synthesize title, description, priceLabel, pic, container, contactSeller, item, callNotText;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -35,18 +34,23 @@
     [item fetchIfNeeded];
     [item incrementKey:@"mobileContact"];
     [item saveInBackground];
-    Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
     
-    if (messageClass != nil) {
-        [self displaySMSComposerSheet];
+    if (callNotText && callNotText == [NSNumber numberWithBool:YES]) {
+        NSString *phoneNumber = [@"telprompt://" stringByAppendingString:[item objectForKey:@"postedBy"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Sorry!"
-                              message: @"You cannot send this message from this device."
-                              delegate: nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
+        Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
+        if (messageClass != nil) {
+            [self displaySMSComposerSheet];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle: @"Sorry!"
+                                  message: @"You cannot send this message from this device."
+                                  delegate: nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+        }
     }
 }
 
