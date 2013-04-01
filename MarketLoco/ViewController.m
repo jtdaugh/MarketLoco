@@ -113,7 +113,7 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
                 NSLog(@"Successfully retrieved the first %d listings.", objects.count);
                 itemArray = objects;
                 if ([objects count] == 0) {
-                    endResultsText = @"No Results...";
+                    endResultsText = @"No Results";
                     endResults = true;
                 } else {
                     endResultsText = @"Loading more...";
@@ -159,11 +159,11 @@ network, cellForReference, category, networkButton, categoryButton, locoBar, net
         }
         else {
             if ([itemArray count] > 0) {
-                endResultsText = @"End of Results...";
+                endResultsText = @"End of Results";
                 endResults = true;
             }
             else {
-                endResultsText = @"No Results...";
+                endResultsText = @"No Results";
                 endResults = true;
             }
             [tbView reloadData];
