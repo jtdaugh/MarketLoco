@@ -9,7 +9,7 @@
 #import "NetworksViewController.h"
 #import "ViewController.h"
 
-#define PEEK_AMOUNT 50.0f
+#define PEEK_AMOUNT 70.0f
 
 @interface NetworksViewController ()
 

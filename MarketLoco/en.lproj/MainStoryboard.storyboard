@@ -36,7 +36,7 @@
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTe-ak-cc4">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="270" id="dAA-TF-Pfj"/>
+                                    <constraint firstAttribute="width" constant="250" id="0Al-l5-Te0"/>
                                 </constraints>
                                 <color key="tintColor" red="0.0" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
@@ -47,11 +47,11 @@
                         <color key="backgroundColor" red="0.1333333333" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="EYO-iW-jys" firstAttribute="bottom" secondItem="kod-rW-XBo" secondAttribute="bottom" type="default" id="5ar-Q6-XQA"/>
-                            <constraint firstItem="RTe-ak-cc4" firstAttribute="leading" secondItem="EYO-iW-jys" secondAttribute="leading" type="default" id="OQh-lg-oTL"/>
+                            <constraint firstItem="EYO-iW-jys" firstAttribute="trailing" secondItem="kod-rW-XBo" secondAttribute="trailing" type="default" id="CoC-aV-bGE"/>
                             <constraint firstItem="RTe-ak-cc4" firstAttribute="top" secondItem="kod-rW-XBo" secondAttribute="top" type="default" id="WyF-RN-lwf"/>
+                            <constraint firstItem="RTe-ak-cc4" firstAttribute="leading" secondItem="EYO-iW-jys" secondAttribute="leading" type="default" id="Zko-T0-qHO"/>
                             <constraint firstItem="RTe-ak-cc4" firstAttribute="bottom" secondItem="EYO-iW-jys" secondAttribute="top" type="default" id="f9i-8n-64g"/>
-                            <constraint firstItem="RTe-ak-cc4" firstAttribute="trailing" secondItem="kod-rW-XBo" secondAttribute="trailing" type="default" id="rda-cT-yLF"/>
-                            <constraint firstItem="EYO-iW-jys" firstAttribute="trailing" secondItem="kod-rW-XBo" secondAttribute="trailing" type="default" id="xAx-4U-DWz"/>
+                            <constraint firstItem="RTe-ak-cc4" firstAttribute="trailing" secondItem="kod-rW-XBo" secondAttribute="trailing" type="default" id="sSC-Aa-Ygs"/>
                         </constraints>
                     </view>
                     <connections>
@@ -92,7 +92,7 @@
                                 <color key="separatorColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.1333333333" green="0.14901960780000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Cen-1c-uem" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="5bG-md-mqc"/>
                             <constraint firstItem="CTp-G7-hcD" firstAttribute="top" secondItem="Cen-1c-uem" secondAttribute="bottom" type="default" id="B1r-sA-w7I"/>
